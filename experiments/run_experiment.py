@@ -3,43 +3,16 @@ import pickle
 import csv
 import time
 
+from bloc_reloc_v2.core import BlocRelocV2
+
 
 GRAPH_DIR = "data/graphs"
-OUT = "results/baseline_results.csv"
-
-
-def placeholder_solver(graph, variant):
-    """
-    Placeholder.
-    Será reemplazado por BLOC-RELOC v2 real.
-    """
-    start = time.time()
-
-    nodes = graph.number_of_nodes()
-    edges = graph.number_of_edges()
-
-    runtime = time.time() - start
-
-    return {
-        "edge_cut": -1,
-        "balance": -1,
-        "runtime": runtime,
-        "nodes": nodes,
-        "edges": edges,
-        "variant": variant
-    }
+OUT = "results/bloc_reloc_v2_results.csv"
 
 
 def main():
 
     os.makedirs("results", exist_ok=True)
-
-    variants = [
-        "baseline",
-        "affinity_modified",
-        "hub_aware",
-        "bloc_reloc_v2_full"
-    ]
 
     rows = []
 
@@ -48,27 +21,37 @@ def main():
         if not file.endswith(".pkl"):
             continue
 
-        with open(
-            os.path.join(GRAPH_DIR, file),
-            "rb"
-        ) as f:
+        path = os.path.join(GRAPH_DIR, file)
+
+        with open(path, "rb") as f:
             graph = pickle.load(f)
 
-        for variant in variants:
+        start = time.time()
 
-            result = placeholder_solver(
-                graph,
-                variant
-            )
+        solver = BlocRelocV2(
+            graph,
+            k=4,
+            seed=42
+        )
 
-            result["graph"] = file
+        result = solver.refine(
+            iterations=50
+        )
 
-            rows.append(result)
+        runtime = time.time() - start
 
-            print(
-                file,
-                variant
-            )
+        rows.append({
+            "graph": file,
+            "variant": "bloc_reloc_v2_baseline",
+            "edge_cut": result["edge_cut"],
+            "runtime": runtime,
+            "nodes": graph.number_of_nodes(),
+            "edges": graph.number_of_edges()
+        })
+
+        print(
+            f"{file}: cut={result['edge_cut']} time={runtime:.4f}s"
+        )
 
 
     with open(
