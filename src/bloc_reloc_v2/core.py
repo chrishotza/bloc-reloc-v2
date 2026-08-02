@@ -1,18 +1,70 @@
-"""
-Core implementation placeholder.
-
-Experimental development starts here.
-"""
+import random
 
 
 class BlocRelocV2:
-    def __init__(self, config=None):
-        self.config = config
 
-    def fit(self, graph, k):
-        raise NotImplementedError(
-            "Implementation pending experimental validation"
-        )
+    def __init__(self, graph, k=4, seed=42):
+        self.graph = graph
+        self.k = k
+        self.seed = seed
+        random.seed(seed)
 
-    def partition(self):
-        raise NotImplementedError()
+
+    def initialize_partition(self):
+        partition = {}
+
+        for i, node in enumerate(self.graph.nodes()):
+            partition[node] = i % self.k
+
+        return partition
+
+
+    def edge_cut(self, partition):
+
+        cut = 0
+
+        for u, v in self.graph.edges():
+
+            if partition[u] != partition[v]:
+                cut += 1
+
+        return cut
+
+
+    def refine(self, iterations=10):
+
+        partition = self.initialize_partition()
+
+        best = self.edge_cut(partition)
+
+        for _ in range(iterations):
+
+            nodes = list(self.graph.nodes())
+            random.shuffle(nodes)
+
+            for node in nodes:
+
+                current = partition[node]
+
+                candidates = [
+                    x for x in range(self.k)
+                    if x != current
+                ]
+
+                target = random.choice(candidates)
+
+                partition[node] = target
+
+                new_cut = self.edge_cut(partition)
+
+                if new_cut < best:
+                    best = new_cut
+
+                else:
+                    partition[node] = current
+
+
+        return {
+            "partition": partition,
+            "edge_cut": best
+        }
