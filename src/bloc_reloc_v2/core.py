@@ -1,4 +1,5 @@
 import random
+from collections import Counter
 
 
 class BlocRelocV2:
@@ -24,11 +25,24 @@ class BlocRelocV2:
         cut = 0
 
         for u, v in self.graph.edges():
-
             if partition[u] != partition[v]:
                 cut += 1
 
         return cut
+
+
+    def balanced(self, partition):
+
+        counts = Counter(partition.values())
+
+        sizes = list(counts.values())
+
+        target = len(partition) / self.k
+
+        return all(
+            abs(size - target) <= target * 0.25
+            for size in sizes
+        )
 
 
     def refine(self, iterations=10):
@@ -57,7 +71,7 @@ class BlocRelocV2:
 
                 new_cut = self.edge_cut(partition)
 
-                if new_cut < best:
+                if self.balanced(partition) and new_cut < best:
                     best = new_cut
 
                 else:
