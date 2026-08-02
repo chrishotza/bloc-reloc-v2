@@ -1,9 +1,12 @@
 import os
+import sys
 import pickle
 import csv
 import time
 
-from bloc_reloc_v2.core import BlocRelocV2
+sys.path.insert(0, os.path.abspath("."))
+
+from src.bloc_reloc_v2.core import BlocRelocV2
 
 
 GRAPH_DIR = "data/graphs"
@@ -21,9 +24,7 @@ def main():
         if not file.endswith(".pkl"):
             continue
 
-        path = os.path.join(GRAPH_DIR, file)
-
-        with open(path, "rb") as f:
+        with open(os.path.join(GRAPH_DIR, file), "rb") as f:
             graph = pickle.load(f)
 
         start = time.time()
@@ -34,9 +35,7 @@ def main():
             seed=42
         )
 
-        result = solver.refine(
-            iterations=50
-        )
+        result = solver.refine(iterations=50)
 
         runtime = time.time() - start
 
@@ -49,27 +48,16 @@ def main():
             "edges": graph.number_of_edges()
         })
 
-        print(
-            f"{file}: cut={result['edge_cut']} time={runtime:.4f}s"
-        )
+        print(f"{file}: cut={result['edge_cut']} time={runtime:.4f}s")
 
 
-    with open(
-        OUT,
-        "w",
-        newline=""
-    ) as f:
-
-        writer = csv.DictWriter(
-            f,
-            fieldnames=rows[0].keys()
-        )
-
+    with open(OUT, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=rows[0].keys())
         writer.writeheader()
         writer.writerows(rows)
 
 
-    print("\nSaved:", OUT)
+    print("Saved:", OUT)
 
 
 if __name__ == "__main__":
