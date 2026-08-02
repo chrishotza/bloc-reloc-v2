@@ -1,0 +1,25 @@
+experiment:
+  name: bloc_reloc_v2_validation
+  seeds: 30
+
+datasets:
+  synthetic:
+    - random_regular
+    - watts_strogatz
+    - barabasi_albert
+    - planted_partition
+
+  real:
+    - SNAP
+
+metrics:
+  - edge_cut
+  - balance
+  - runtime
+  - memory
+
+variants:
+  - baseline
+  - affinity_modified
+  - hub_aware
+  - bloc_reloc_v2_full
