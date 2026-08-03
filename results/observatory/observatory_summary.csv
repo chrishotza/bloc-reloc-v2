@@ -1,0 +1,7 @@
+configuration,mean_final_edge_cut,std_final_edge_cut,mean_runtime_sec,mean_plateau_iteration,mean_active_iterations,mean_acceptance_ratio,mean_delta_improvement,max_delta_improvement,total_positive_avalanches
+baseline,583.2,206.7719,7.7585,3.7333,3.7333,0.006543,37.4598,341.0,448
+affinity,566.6583,208.8261,10.0781,4.55,4.55,0.008397,33.9926,347.0,543
+periodic,536.6833,212.5125,24.1236,11.675,11.675,0.003262,11.3424,257.0,1329
+reactive,540.0083,210.7996,21.7825,15.2583,15.2583,0.007203,12.1555,341.0,1807
+affinity_periodic,528.6583,220.886,30.7621,10.3167,10.3167,0.004254,12.7488,244.0,1266
+affinity_reactive,538.4083,214.3031,26.939,13.725,13.725,0.009233,13.0991,347.0,1675

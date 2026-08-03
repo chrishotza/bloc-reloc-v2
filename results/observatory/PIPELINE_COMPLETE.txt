@@ -1,0 +1,25 @@
+====================================================
+BLOC-RELOC OBSERVATORY PIPELINE EXECUTION REPORT
+====================================================
+Timestamp:        2026-08-03 18:15:20
+Status:           SUCCESS
+
+Scripts Executed:
+  - dynamics_observatory.py
+  - observatory_advanced_analysis.py
+  - observatory_final_summary.py
+
+Generated Artifacts:
+  - results/observatory/relaxation_models.csv
+  - results/observatory/best_relaxation_models.csv
+  - results/observatory/hazard_curve.csv
+  - results/observatory/survival_analysis.csv
+  - results/observatory/avalanche_distribution.csv
+  - results/observatory/observatory_summary.csv
+  - results/observatory/relaxation_regime.csv
+  - results/observatory/avalanche_statistics.csv
+  - results/observatory/avalanche_tail_models.csv
+  - results/observatory/master_relaxation_curves.csv
+  - results/observatory/topology_dynamics_correlation.csv
+  - results/observatory/dynamic_regime_summary.csv
+====================================================

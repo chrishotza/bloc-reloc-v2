@@ -1,0 +1,7 @@
+configuration,quality_rank,dynamic_persistence_rank,exploration_rank,final_edge_cut,extinction_time,total_avalanches,mean_active_iterations,mean_delta,relaxation_regime,mechanism_class
+baseline,6,5,6,583.2,8.0,448,3.7333,37.4598,stretched exponential dominated,Premature-convergent
+affinity,5,6,5,566.6583,7.0,543,4.55,33.9926,stretched exponential dominated,Premature-convergent
+periodic,2,1,3,536.6833,48.0,1329,11.675,11.3424,stretched exponential dominated,Balanced
+reactive,4,1,1,540.0083,48.0,1807,15.2583,12.1555,power-law candidate,Balanced
+affinity_periodic,1,3,4,528.6583,38.0,1266,10.3167,12.7488,power-law candidate,Balanced
+affinity_reactive,3,4,2,538.4083,33.0,1675,13.725,13.0991,power-law candidate,Balanced

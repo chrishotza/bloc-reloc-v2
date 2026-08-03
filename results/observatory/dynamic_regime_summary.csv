@@ -1,0 +1,7 @@
+configuration,survival_t5,survival_t10,survival_t15,time_to_survival_50,time_to_survival_10,extinction_time,total_avalanches,mean_delta,median_delta,max_delta,best_relaxation_model,relaxation_regime
+baseline,0.1,0.0,0.0,4,5,8,448,37.4598,16.0,341.0,stretched_exp,stretched exponential dominated
+affinity,0.233333,0.0,0.0,4,6,7,543,33.9926,13.0,347.0,stretched_exp,stretched exponential dominated
+periodic,0.716667,0.458333,0.25,10,22,48,1329,11.3424,2.0,257.0,stretched_exp,stretched exponential dominated
+reactive,0.925,0.616667,0.441667,12,26,48,1807,12.1555,3.0,341.0,power_law,power-law candidate
+affinity_periodic,0.675,0.391667,0.233333,8,21,38,1266,12.7488,3.0,244.0,power_law,power-law candidate
+affinity_reactive,0.891667,0.55,0.383333,12,25,33,1675,13.0991,3.0,347.0,power_law,power-law candidate

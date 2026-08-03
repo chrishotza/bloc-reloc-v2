@@ -1,0 +1,7 @@
+configuration,mean_final_edge_cut,rank
+affinity_periodic,528.6583,1
+periodic,536.6833,2
+affinity_reactive,538.4083,3
+reactive,540.0083,4
+affinity,566.6583,5
+baseline,583.2,6

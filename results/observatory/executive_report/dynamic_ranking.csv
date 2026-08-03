@@ -1,0 +1,7 @@
+configuration,time_to_survival_50,extinction_time,total_avalanches,rank_dynamic
+reactive,12,48,1807,1
+affinity_reactive,12,33,1675,2
+periodic,10,48,1329,3
+affinity_periodic,8,38,1266,4
+baseline,4,8,448,5
+affinity,4,7,543,6

@@ -1,0 +1,7 @@
+configuration,mechanism_class,quality_score,persistence_score,exploration_score,balance_score,convergence_speed,dynamic_lifetime,avalanche_activity,relaxation_regime,mechanism_vector
+baseline,Premature-convergent,0.0,0.0244,0.0,0.0081,0.25,8.0,448,stretched exponential dominated,QUALITY_LOW | PERSISTENCE_LOW | EXPLORATION_LOW | PREMATURE_CONVERGENT
+affinity,Premature-convergent,0.3033,0.0,0.0704,0.1246,0.25,7.0,543,stretched exponential dominated,QUALITY_LOW | PERSISTENCE_LOW | EXPLORATION_LOW | PREMATURE_CONVERGENT
+periodic,Balanced,0.8529,1.0,0.6687,0.8405,0.1,48.0,1329,stretched exponential dominated,QUALITY_HIGH | PERSISTENCE_HIGH | EXPLORATION_HIGH | BALANCED
+reactive,Balanced,0.7919,1.0,1.0,0.9306,0.083333,48.0,1807,power-law candidate,QUALITY_HIGH | PERSISTENCE_HIGH | EXPLORATION_HIGH | BALANCED
+affinity_periodic,Balanced,1.0,0.7561,0.5866,0.7809,0.125,38.0,1266,power-law candidate,QUALITY_HIGH | PERSISTENCE_HIGH | EXPLORATION_MEDIUM | BALANCED
+affinity_reactive,Balanced,0.8212,0.6341,0.8849,0.7801,0.083333,33.0,1675,power-law candidate,QUALITY_HIGH | PERSISTENCE_MEDIUM | EXPLORATION_HIGH | BALANCED

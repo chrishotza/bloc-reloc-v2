@@ -1,0 +1,15 @@
+BLOC-RELOC V2 FINAL SYNTHESIS METADATA
+================================================
+Timestamp: 2026-08-03 18:59:25
+Script Version: 1.0.0
+Number of Configurations: 6
+
+Input Files Used:
+- results/observatory/executive_report/EXECUTIVE_SUMMARY.md
+- results/observatory/executive_report/performance_ranking.csv
+- results/observatory/executive_report/dynamic_ranking.csv
+- results/observatory/mechanism_audit/mechanism_profile.csv
+- results/observatory/mechanism_fingerprint/mechanism_fingerprint.csv
+- results/observatory/mechanism_fingerprint/MECHANISM_FINGERPRINT_REPORT.md
+- results/observatory/performance_dynamics_correlations.csv
+================================================

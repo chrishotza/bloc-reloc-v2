@@ -1,0 +1,7 @@
+configuration,best_model_aic,best_model_bic,relaxation_regime
+baseline,stretched_exp,stretched_exp,stretched exponential dominated
+affinity,stretched_exp,stretched_exp,stretched exponential dominated
+periodic,stretched_exp,stretched_exp,stretched exponential dominated
+reactive,power_law,power_law,power-law candidate
+affinity_periodic,power_law,power_law,power-law candidate
+affinity_reactive,power_law,power_law,power-law candidate

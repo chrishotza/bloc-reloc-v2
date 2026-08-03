@@ -1,0 +1,13 @@
+configuration,model,parameters,rmse,aic,bic
+baseline,exponential_tail,"a=0.9287, lambda=0.0350",0.033871,-3022.3657,-3014.1606
+baseline,power_law_tail,"a=1.0922, alpha=0.3267",0.102436,-2032.9965,-2024.7914
+affinity,exponential_tail,"a=0.9246, lambda=0.0402",0.042436,-3421.1759,-3412.5853
+affinity,power_law_tail,"a=1.0924, alpha=0.3453",0.092271,-2579.1983,-2570.6078
+periodic,exponential_tail,"a=1.0037, lambda=0.2382",0.089691,-6400.6473,-6390.2644
+periodic,power_law_tail,"a=0.8226, alpha=0.5976",0.067249,-7165.4921,-7155.1093
+reactive,exponential_tail,"a=1.0118, lambda=0.2225",0.081411,-9055.7612,-9044.7635
+reactive,power_law_tail,"a=0.8483, alpha=0.5773",0.059856,-10166.7358,-10155.7381
+affinity_periodic,exponential_tail,"a=0.9739, lambda=0.1743",0.077593,-6463.3683,-6453.0826
+affinity_periodic,power_law_tail,"a=0.8704, alpha=0.5264",0.054978,-7335.0635,-7324.7779
+affinity_reactive,exponential_tail,"a=1.0183, lambda=0.2155",0.076513,-8601.3618,-8590.5159
+affinity_reactive,power_law_tail,"a=0.8626, alpha=0.5664",0.056837,-9596.6313,-9585.7853

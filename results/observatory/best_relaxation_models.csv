@@ -1,0 +1,13 @@
+configuration,target_type,best_model_aic,min_aic,best_model_bic,min_bic,warning_short_timeseries
+affinity,normalized,stretched_exp,-731.7052,stretched_exp,-724.0571,False
+affinity,raw,stretched_exp,-277.0298,stretched_exp,-269.3817,False
+affinity_periodic,normalized,power_law,-520.1985,power_law,-514.4625,True
+affinity_periodic,raw,power_law,-19.1155,power_law,-13.3794,True
+affinity_reactive,normalized,power_law,-465.6812,power_law,-459.9452,True
+affinity_reactive,raw,power_law,47.1181,power_law,52.8542,True
+baseline,normalized,stretched_exp,-747.1615,stretched_exp,-739.5134,False
+baseline,raw,stretched_exp,-243.5599,stretched_exp,-235.9118,False
+periodic,normalized,stretched_exp,-468.4313,stretched_exp,-460.7832,False
+periodic,raw,stretched_exp,19.0283,stretched_exp,26.6764,False
+reactive,normalized,power_law,-533.9589,power_law,-528.2229,True
+reactive,raw,power_law,-30.4818,power_law,-24.7458,True

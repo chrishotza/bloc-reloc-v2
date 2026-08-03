@@ -1,0 +1,7 @@
+configuration,mean_final_edge_cut,std_final_edge_cut,mean_runtime_sec,time_to_survival_50,time_to_survival_10,extinction_time,mean_active_iterations,total_avalanches,mean_delta,median_delta,relaxation_regime,exploration_duration,exploration_survival_index,avalanche_frequency,dynamic_efficiency,mean_delta_improvement,max_delta_improvement
+baseline,583.2,206.7719,7.7585,4.0,5.0,8.0,3.7333,448.0,37.4598,16.0,stretched exponential dominated,3.7333,0.5,56.0,4.828227,37.4598,341.0
+affinity,566.6583,208.8261,10.0781,4.0,6.0,7.0,4.55,543.0,33.9926,13.0,stretched exponential dominated,4.55,0.571429,77.571429,3.372918,33.9926,347.0
+periodic,536.6833,212.5125,24.1236,10.0,22.0,48.0,11.675,1329.0,11.3424,2.0,stretched exponential dominated,11.675,0.208333,27.6875,0.470179,11.3424,257.0
+reactive,540.0083,210.7996,21.7825,12.0,26.0,48.0,15.2583,1807.0,12.1555,3.0,power-law candidate,15.2583,0.25,37.645833,0.55804,12.1555,341.0
+affinity_periodic,528.6583,220.886,30.7621,8.0,21.0,38.0,10.3167,1266.0,12.7488,3.0,power-law candidate,10.3167,0.210526,33.315789,0.414432,12.7488,244.0
+affinity_reactive,538.4083,214.3031,26.939,12.0,25.0,33.0,13.725,1675.0,13.0991,3.0,power-law candidate,13.725,0.363636,50.757576,0.48625,13.0991,347.0

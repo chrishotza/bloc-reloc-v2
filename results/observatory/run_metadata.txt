@@ -1,0 +1,13 @@
+BLOC-RELOC-V2 DYNAMICS OBSERVATORY RUN METADATA
+==================================================================
+Execution Date/Time : 2026-08-03 18:15:12 UTC
+Python Version      : 3.12.1
+Pandas Version      : 3.0.5
+Numpy Version       : 2.5.1
+Input Path          : /workspaces/bloc-reloc-v2/results/search_dynamics.csv
+Output Path         : /workspaces/bloc-reloc-v2/results/observatory
+------------------------------------------------------------------
+Rows Processed      : 36000
+Graphs Count        : 120
+Detected Configs    : baseline, affinity, periodic, reactive, affinity_periodic, affinity_reactive
+==================================================================
