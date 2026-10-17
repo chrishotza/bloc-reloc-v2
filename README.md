@@ -48,7 +48,7 @@ python -m experiments.run_generation
 python -m experiments.run_experiment
 ```
 
-The generator writes local Python pickle graph fixtures to `data/graphs/`, which is ignored by Git. **Only load those pickles when they were generated locally or come from a trusted source.** The minimal runner outputs `results/bloc_reloc_v2_results.csv`; running it may overwrite that tracked result file, so work on a separate branch or copy when preserving archived evidence.
+The generator writes local Python pickle graph fixtures to `data/graphs/`, which is ignored by Git. **Only load pickles generated locally or obtained from a trusted source.** The minimal runner now writes **new** CSVs to `results/local/bloc_reloc_v2_results.csv`, also ignored by Git, leaving the archived `results/bloc_reloc_v2_results.csv` unchanged. A second run refuses to overwrite its output unless `--output` points elsewhere or `--overwrite` is explicitly passed.
 
 **Important:** This minimal path evaluates `baseline` and `affinity_modified` with a fixed seed in the runner. The broader plans mention additional hub-aware and full variants, but those are **not automatically covered** by the minimal runner.
 
