@@ -18,6 +18,7 @@ BLOC-RELOC v2 studies local partition moves, structural affinity, hub-dominated 
 | Read the historical synthesis / Leer la síntesis histórica | [Final synthesis](results/observatory/final_synthesis/BLOC_RELOC_V2_FINAL_SYNTHESIS.md) |
 | Reproduce without confusing old/new evidence / Reproducir sin mezclar evidencias | [Reproducibility guide](reproducibility/README.md) |
 | Review scientific constraints / Revisar limitaciones | [Experimental plan](reproducibility/EXPERIMENT_PLAN.md) |
+| AI agent handoff / Guía para agentes de IA | [AGENTS.md](AGENTS.md) |
 
 ## What was observed / Qué se observó
 
