@@ -10,6 +10,7 @@ Este repositorio contiene **resultados históricos archivados y scripts para nue
 | --- | --- |
 | [`results/`](../results/) | **Tracked** CSVs, plots and observatory reports from earlier studies, including the six-configuration dynamics synthesis |
 | `data/graphs/` | **Untracked** synthetic pickle fixtures generated locally; deliberately excluded via `.gitignore` |
+| `results/local/` | **Untracked** CSVs from new local experiments; excluded via `.gitignore` to protect archived reports |
 | [`experiments/run_generation.py`](../experiments/run_generation.py) | Synthetic graph creation using four graph families and seeds 0–29 |
 | [`experiments/run_experiment.py`](../experiments/run_experiment.py) | Minimal runner currently comparing **baseline** against **affinity_modified** only |
 | [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md) | Broader research protocol; **a plan, not evidence that every listed variant was run** |
@@ -24,9 +25,11 @@ python -m experiments.run_generation
 python -m experiments.run_experiment
 ```
 
-The generator creates `data/graphs/` under the repository root. The runner reads those graphs, uses its own fixed algorithm seed, and writes `results/bloc_reloc_v2_results.csv`.
+The generator creates `data/graphs/` under the repository root. The runner reads those graphs, uses a fixed algorithm seed (default `42`), and writes **new output** to the ignored `results/local/bloc_reloc_v2_results.csv`. It **does not overwrite** the tracked historical file `results/bloc_reloc_v2_results.csv`.
 
-**Preserve evidence:** The results CSV is tracked by Git. The minimal runner **overwrites** it; use a clean working copy or a dedicated branch before running. Do not commit newly generated results as if they were the historical benchmark without identifying the new protocol.
+**Preserve evidence:** A repeat invocation fails if the selected output already exists. Choose a fresh path via `--output results/local/another-run.csv`, or use `--overwrite` only when intentionally replacing your **new local** CSV. Avoid directing output to archived paths. Options: `--graph-dir`, `--output`, `--iterations`, `--seed`, `--overwrite`.
+
+**Run metadata:** The output currently includes `graph`, `variant`, `edge_cut`, `runtime`, `nodes` and `edges`. Store the graph/seed/iteration settings and environment with the CSV when making reproducibility claims; this small runner does not produce a full scientific provenance manifest.
 
 **Security:** Python pickle is not safe for untrusted files. Only open graph pickles created by the local generator or received from a source you trust.
 
