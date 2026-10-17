@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 data/graphs/
 *.pkl
+# New local run outputs (archived CSVs under results/ stay tracked)
+results/local/
