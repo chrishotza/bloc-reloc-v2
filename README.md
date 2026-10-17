@@ -16,6 +16,7 @@ BLOC-RELOC v2 studies local partition moves, structural affinity, hub-dominated 
 | Run the baseline comparison / Ejecutar la comparación básica | [Experiment runner](experiments/run_experiment.py) |
 | Inspect recorded results / Revisar resultados existentes | [Results CSV](results/bloc_reloc_v2_results.csv) · [observatory summary](results/observatory/executive_report/EXECUTIVE_SUMMARY.md) |
 | Read the historical synthesis / Leer la síntesis histórica | [Final synthesis](results/observatory/final_synthesis/BLOC_RELOC_V2_FINAL_SYNTHESIS.md) |
+| Reproduce without confusing old/new evidence / Reproducir sin mezclar evidencias | [Reproducibility guide](reproducibility/README.md) |
 | Review scientific constraints / Revisar limitaciones | [Experimental plan](reproducibility/EXPERIMENT_PLAN.md) |
 
 ## What was observed / Qué se observó
