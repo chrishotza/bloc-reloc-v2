@@ -38,17 +38,28 @@ Source: [BLOC-RELOC v2 final synthesis](results/observatory/final_synthesis/BLOC
 
 *Archived experimental visualization / Visualización experimental archivada.*
 
-## Minimal reproduction / Reproducción mínima
+## Quick smoke test / Prueba rápida
 
-Run from the repository root. Python and `networkx` are needed for the generator; the entrypoint scripts use the included source tree.
+Start with **four small synthetic graphs** (one seed × four graph families), not the entire historical suite. Python and `networkx` are required:
 
 ```bash
 python -m pip install networkx
+python -m experiments.run_generation --seeds 1 --nodes 24 --output-dir data/graphs-smoke
+python -m experiments.run_experiment --graph-dir data/graphs-smoke --iterations 3 --output results/local/smoke.csv
+```
+
+This produces **8 rows** (four graphs × two variants) in an ignored local CSV. It is a **smoke test, not a reproduction of the six-configuration historical observatory**. Reruns refuse to overwrite generated fixtures or CSVs by default: choose a different output path, or explicitly use `--overwrite` for outputs you intend to replace.
+
+## Full synthetic generator defaults / Configuración experimental original
+
+The historical generator defaults to **4 graph families × 30 seeds, 300 nodes per graph (120 graph files)**. The runner defaults to 50 iterations per graph/variant, so a complete run is computationally expensive. Do **not** mistake the quick smoke test for a comparable full benchmark.
+
+```bash
 python -m experiments.run_generation
 python -m experiments.run_experiment
 ```
 
-The generator writes local Python pickle graph fixtures to `data/graphs/`, which is ignored by Git. **Only load pickles generated locally or obtained from a trusted source.** The minimal runner now writes **new** CSVs to `results/local/bloc_reloc_v2_results.csv`, also ignored by Git, leaving the archived `results/bloc_reloc_v2_results.csv` unchanged. A second run refuses to overwrite its output unless `--output` points elsewhere or `--overwrite` is explicitly passed.
+Graph pickles are written to `data/graphs/` (ignored by Git); **only load locally generated or trusted pickles**. New CSVs go to `results/local/bloc_reloc_v2_results.csv` (also ignored). The archived `results/bloc_reloc_v2_results.csv` is not overwritten. See [the detailed reproducibility guide](reproducibility/README.md) for interpretation and limitations.
 
 **Important:** This minimal path evaluates `baseline` and `affinity_modified` with a fixed seed in the runner. The broader plans mention additional hub-aware and full variants, but those are **not automatically covered** by the minimal runner.
 
