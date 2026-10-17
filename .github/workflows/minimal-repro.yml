@@ -4,12 +4,16 @@ on:
   push:
     paths:
       - experiments/run_experiment.py
+      - experiments/run_generation.py
+      - src/bloc_reloc_v2/generators.py
       - src/bloc_reloc_v2/**
       - tests/**
       - .github/workflows/minimal-repro.yml
   pull_request:
     paths:
       - experiments/run_experiment.py
+      - experiments/run_generation.py
+      - src/bloc_reloc_v2/generators.py
       - src/bloc_reloc_v2/**
       - tests/**
       - .github/workflows/minimal-repro.yml
@@ -29,7 +33,7 @@ jobs:
           python-version: '3.11'
       - name: Install graph test dependency
         run: python -m pip install 'networkx>=3,<4'
-      - name: Compile the minimal experiment and regression tests
-        run: python -m compileall -q experiments/run_experiment.py tests
-      - name: Run small trusted synthetic fixtures and overwrite checks
+      - name: Compile the minimal generator, experiment and regression tests
+        run: python -m compileall -q experiments/run_generation.py experiments/run_experiment.py tests
+      - name: Run trusted synthetic generation, two-variant smoke runs and overwrite checks
         run: python -m unittest discover -s tests -v
