@@ -15,17 +15,26 @@ Este repositorio contiene **resultados históricos archivados y scripts para nue
 | [`experiments/run_experiment.py`](../experiments/run_experiment.py) | Minimal runner currently comparing **baseline** against **affinity_modified** only |
 | [`EXPERIMENT_PLAN.md`](EXPERIMENT_PLAN.md) | Broader research protocol; **a plan, not evidence that every listed variant was run** |
 
-## Minimal local procedure / Procedimiento mínimo local
+## Quick smoke test / Prueba rápida
 
-From the repository root, with Python and NetworkX installed:
+Run from repository root with Python and NetworkX. This checks the two-variant runner on **4 small, 24-node synthetic graphs**, avoiding the expensive original default of 120 graphs with 300 nodes each.
 
 ```bash
 python -m pip install networkx
+python -m experiments.run_generation --seeds 1 --nodes 24 --output-dir data/graphs-smoke
+python -m experiments.run_experiment --graph-dir data/graphs-smoke --iterations 3 --output results/local/smoke.csv
+```
+
+Expected shape: **8 CSV rows** (four graph families × two comparison variants). The check verifies wiring and output behavior, not the historical scientific claims.
+
+## Full generator defaults / Protocolo completo original
+
+Without CLI options, `run_generation.py` creates **4 families × 30 seeds (120 graphs, each 300 nodes)** in `data/graphs/`. The runner uses a fixed algorithm seed (default `42`), **50 refinement iterations** per graph/variant and writes new output to `results/local/bloc_reloc_v2_results.csv`. This can be computationally expensive; plan resources before running the full suite. It **does not overwrite** the tracked historical file `results/bloc_reloc_v2_results.csv`.
+
+```bash
 python -m experiments.run_generation
 python -m experiments.run_experiment
 ```
-
-The generator creates `data/graphs/` under the repository root. The runner reads those graphs, uses a fixed algorithm seed (default `42`), and writes **new output** to the ignored `results/local/bloc_reloc_v2_results.csv`. It **does not overwrite** the tracked historical file `results/bloc_reloc_v2_results.csv`.
 
 **Preserve evidence:** A repeat invocation fails if the selected output already exists. Choose a fresh path via `--output results/local/another-run.csv`, or use `--overwrite` only when intentionally replacing your **new local** CSV. Avoid directing output to archived paths. Options: `--graph-dir`, `--output`, `--iterations`, `--seed`, `--overwrite`.
 
