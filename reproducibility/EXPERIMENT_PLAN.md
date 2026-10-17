@@ -1,5 +1,10 @@
 # BLOC-RELOC v2 Experimental Plan
 
+> **Protocol status / Estado del protocolo:** This document is a **research plan**, not proof that every listed comparison has been executed. The repository also retains archived historical results. The rule below prohibiting copied historical results applies to **new confirmatory runs**, not to the retention of clearly labelled archive artifacts. As currently checked in, the minimal runner implements `baseline` and `affinity_modified`; separate reproducible evidence is needed for additional planned variants and external baselines.
+>
+> **ES:** Este documento es un **plan experimental**, no una certificación de ejecución. Los resultados históricos archivados se conservan como evidencia diferenciada; la prohibición de copiarlos se aplica a nuevas ejecuciones confirmatorias. Ver [Reproducibility / Reproducibilidad](README.md).
+
+
 ## Objective
 
 Reproduce and evaluate BLOC-RELOC v2 under a controlled protocol.
