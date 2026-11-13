@@ -5,6 +5,9 @@ from collections import Counter
 class BlocRelocV2:
 
     def __init__(self, graph, k=4, seed=42, variant="baseline", operator="1_swap"):
+        node_count = graph.number_of_nodes()
+        if type(k) is not int or not 1 <= k <= node_count:
+            raise ValueError("k must be a positive integer no larger than graph nodes")
         self.graph=graph
         self.k=k
         self.seed=seed
@@ -42,11 +45,17 @@ class BlocRelocV2:
 
 
     def two_swap_step(self, part, counts, best, max_samples=None):
+        if max_samples is not None and (
+            type(max_samples) is not int or max_samples < 0
+        ):
+            raise ValueError("max_samples must be a nonnegative integer or None")
 
         accepted=0
         rejected=0
 
         nodes=list(self.graph.nodes())
+        if len(nodes)<2:
+            return part,counts,best,accepted,rejected
 
         if max_samples is None:
 
@@ -89,6 +98,14 @@ class BlocRelocV2:
         return part,counts,best,accepted,rejected
 
     def refine(self,iterations=50,hybrid_period=None,hybrid_samples=1200,reactive_stall=None):
+        if type(iterations) is not int or iterations < 0:
+            raise ValueError("iterations must be a nonnegative integer")
+        for name, value in (("hybrid_period", hybrid_period),
+                            ("reactive_stall", reactive_stall)):
+            if value is not None and (type(value) is not int or value < 1):
+                raise ValueError(f"{name} must be a positive integer or None")
+        if type(hybrid_samples) is not int or hybrid_samples < 1:
+            raise ValueError("hybrid_samples must be a positive integer")
 
         part=self.initialize_partition()
         counts=Counter(part.values())
