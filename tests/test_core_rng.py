@@ -39,5 +39,44 @@ class LocalRandomnessTests(unittest.TestCase):
         self.assertEqual(a, b)
 
 
+    def test_invalid_partition_counts_are_rejected_before_initializing(self):
+        graph = nx.cycle_graph(6)
+        for k in (0, -1, 7, 1.5, True, False, "2"):
+            with self.subTest(k=k), self.assertRaisesRegex(ValueError, "k must"):
+                BlocRelocV2(graph, k=k)
+        with self.assertRaisesRegex(ValueError, "k must"):
+            BlocRelocV2(nx.Graph(), k=1)
+
+    def test_invalid_refinement_parameters_fail_closed(self):
+        runner = BlocRelocV2(nx.cycle_graph(8), k=2, seed=9)
+        for kwargs in (
+            {"iterations": -1}, {"iterations": True},
+            {"hybrid_period": 0}, {"hybrid_period": False},
+            {"hybrid_period": 1.5}, {"reactive_stall": 0},
+            {"reactive_stall": True}, {"hybrid_samples": 0},
+            {"hybrid_samples": -1},
+        ):
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                runner.refine(**kwargs)
+
+    def test_single_node_hybrid_refinement_remains_safe(self):
+        graph = nx.empty_graph(1)
+        result = BlocRelocV2(graph, k=1, seed=1).refine(
+            iterations=2, hybrid_period=1, hybrid_samples=3
+        )
+        self.assertEqual(result["edge_cut"], 0)
+        self.assertEqual(len(result["trace"]), 2)
+
+    def test_invalid_direct_swap_sample_count_rejected(self):
+        from collections import Counter
+
+        runner = BlocRelocV2(nx.cycle_graph(4), k=2)
+        partition = runner.initialize_partition()
+        for count in (-1, True, "3", 0.4):
+            with self.subTest(count=count), self.assertRaises(ValueError):
+                runner.two_swap_step(partition, Counter(partition.values()), 4, count)
+
+
+
 if __name__ == "__main__":
     unittest.main()
