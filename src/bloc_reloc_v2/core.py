@@ -10,7 +10,8 @@ class BlocRelocV2:
         self.seed=seed
         self.variant=variant
         self.operator=operator
-        random.seed(seed)
+        # Keep experiments reproducible without mutating Python's global RNG.
+        self._rng = random.Random(seed)
         self.degree=dict(graph.degree())
 
     def initialize_partition(self):
@@ -49,7 +50,7 @@ class BlocRelocV2:
 
         if max_samples is None:
 
-            random.shuffle(nodes)
+            self._rng.shuffle(nodes)
 
             pairs=[]
 
@@ -60,7 +61,7 @@ class BlocRelocV2:
         else:
 
             pairs=[
-                tuple(random.sample(nodes,2))
+                tuple(self._rng.sample(nodes,2))
                 for _ in range(max_samples)
             ]
 
@@ -107,7 +108,7 @@ class BlocRelocV2:
             rejected=0
 
             nodes=list(self.graph.nodes())
-            random.shuffle(nodes)
+            self._rng.shuffle(nodes)
 
             for node in nodes:
 
