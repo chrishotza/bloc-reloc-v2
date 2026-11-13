@@ -47,6 +47,43 @@ class GeneratorCLITests(unittest.TestCase):
                 self.assertIsInstance(graph, nx.Graph)
                 self.assertEqual(graph.number_of_nodes(), 24)
 
+    def test_nonmultiple_of_three_keeps_all_requested_nodes(self):
+        from src.bloc_reloc_v2.generators import planted_partition
+        for count in (13, 25, 26, 301):
+            with self.subTest(nodes=count):
+                graph = planted_partition(n=count, seed=9)
+                self.assertEqual(graph.number_of_nodes(), count)
+                self.assertEqual(sum(map(len, graph.graph["partition"])), count)
+                self.assertEqual([len(group) for group in graph.graph["partition"]],
+                                 [count // 3, count // 3, count - 2 * (count // 3)])
+                self.assertEqual(
+                    sorted(graph.edges()), sorted(planted_partition(n=count, seed=9).edges())
+                )
+
+    def test_divisible_by_three_uses_historical_networkx_generator(self):
+        from src.bloc_reloc_v2.generators import planted_partition
+        for n in (24, 300):
+            with self.subTest(n=n):
+                self.assertEqual(
+                    sorted(planted_partition(n, seed=4).edges()),
+                    sorted(nx.planted_partition_graph(3, n // 3, 0.05, 0.005,
+                                                      seed=4).edges())
+                )
+
+    def test_generator_rejects_invalid_node_counts(self):
+        from src.bloc_reloc_v2.generators import planted_partition
+        for bad in (0, -1, True, 2, 3.1, "25"):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                planted_partition(n=bad, seed=3)
+
+    def test_cli_nondivisible_graph_size_is_preserved_for_each_family(self):
+        result = self.run_generator("--nodes", "25")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        for path in self.output.glob("*.pkl"):
+            with path.open("rb") as stream:
+                graph = pickle.load(stream)  # Locally generated trusted fixtures.
+            self.assertEqual(graph.number_of_nodes(), 25, path.name)
+
     def test_repeated_generation_requires_explicit_overwrite(self):
         self.assertEqual(self.run_generator().returncode, 0)
         repeat = self.run_generator()
