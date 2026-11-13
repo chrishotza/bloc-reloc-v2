@@ -18,14 +18,18 @@ def barabasi_albert(n=300, m=5, seed=0):
 
 
 def planted_partition(n=300, seed=0):
-    sizes = [n//3, n//3, n - 2*(n//3)]
-    return nx.planted_partition_graph(
-        len(sizes),
-        sizes[0],
-        0.05,
-        0.005,
-        seed=seed
-    )
+    if type(n) is not int or n < 3:
+        raise ValueError("n must be an integer >= 3")
+    sizes = [n // 3, n // 3, n - 2 * (n // 3)]
+    if len(set(sizes)) == 1:
+        # Preserve the historical generator and RNG exactly for n divisible
+        # by three (including the original n=300 experimental fixtures).
+        return nx.planted_partition_graph(
+            len(sizes), sizes[0], 0.05, 0.005, seed=seed
+        )
+    # planted_partition_graph uses a uniform community size. For other n,
+    # random_partition_graph retains the requested total and 3 communities.
+    return nx.random_partition_graph(sizes, 0.05, 0.005, seed=seed)
 
 
 GENERATORS = {
