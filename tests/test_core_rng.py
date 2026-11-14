@@ -39,6 +39,32 @@ class LocalRandomnessTests(unittest.TestCase):
         self.assertEqual(a, b)
 
 
+    def test_accepted_trace_counts_committed_moves_not_competing_candidates(self):
+        # For node 0, both blocks 1 and 2 improve the cut, but block 2 is
+        # better: only one relocation can be committed for this node.
+        graph = nx.Graph()
+        graph.add_nodes_from(range(6))
+        graph.add_edges_from([(0, 1), (0, 2), (0, 5)])
+        runner = BlocRelocV2(graph, k=3, seed=42)
+        runner._rng.shuffle = lambda _: None  # inspect nodes in stable order
+        initial = runner.initialize_partition()
+        self.assertEqual(runner.weighted_cut(initial), 3.0)
+
+        report = runner.refine(iterations=1)
+        final = report["partition"]
+        actual_moves = sum(initial[node] != final[node] for node in graph)
+        self.assertEqual(final[0], 2)
+        self.assertEqual(actual_moves, 1)
+        self.assertEqual(report["trace"][0]["accepted"], actual_moves)
+        self.assertEqual(report["weighted_cost"], runner.weighted_cut(final))
+        self.assertEqual(report["edge_cut"], runner.edge_cut(final))
+
+    def test_no_move_never_increments_accepted_counter(self):
+        graph = nx.empty_graph(6)
+        runner = BlocRelocV2(graph, k=3, seed=9)
+        result = runner.refine(iterations=2)
+        self.assertTrue(all(row["accepted"] == 0 for row in result["trace"]))
+
     def test_invalid_partition_counts_are_rejected_before_initializing(self):
         graph = nx.cycle_graph(6)
         for k in (0, -1, 7, 1.5, True, False, "2"):

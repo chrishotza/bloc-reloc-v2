@@ -147,15 +147,17 @@ class BlocRelocV2:
                         if c<best_cut:
                             best_cut=c
                             best_block=b
-                            accepted+=1
                         else:
                             rejected+=1
 
                         part[node]=old
 
                 if best_block!=old:
+                    # Count only the one committed relocation, not every
+                    # improving candidate block evaluated for this node.
                     counts[old]-=1
                     counts[best_block]+=1
+                    accepted+=1
 
                 part[node]=best_block
 
